@@ -1,0 +1,68 @@
+﻿
+@{
+    ViewData["Title"] = "GetAllDrink";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>GetAllDrink</h1>
+<div class="row">
+    <button class="btn-info col-md-6" onclick="GetUser()">Añadir</button>
+    <button class="btn-danger col-md-6" onclick="LimpiarUser()">Limpiar</button>
+</div>
+<br />
+<div class="row">
+    <table class="table-bordered btn-group-justified " id="tblUsuario">
+        <thead class="bg-success">
+            <tr>
+                <th class="text-center col-lg-2" >Nombre</th>
+                <th class="text-center col-lg-2">Correo</th>
+                <th class="text-center col-lg-3">Direcion</th>
+                <th class="text-center col-lg-1">Sexo</th>
+                <th class="text-center col-lg-4">Foto</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                
+            </tr>
+        </tbody>
+    </table>
+</div>
+<script type="text/javascript">
+    function GetUser() {
+        $.ajax({
+            type: 'Get',
+            url: 'https://randomuser.me/api/',
+            dateType: 'json',
+            success: function (result) {                
+                var htmlTags = '<tr>' +
+                    '<td>' + result.results[0].name.first+ '</td>' +
+                        '<td>' + result.results[0].email + '</td>' +
+                        '<td>' + result.results[0].location.city + '</td>' +
+                        '<td>' + result.results[0].gender + '</td>' +
+                    '<td>' + '<img src="' + result.results[0].picture.large + '" style="height:50px;width:50px;" />' + '</td>' +
+                        
+                        '</tr>';
+                $('#tblUsuario tbody').append(htmlTags);
+              
+
+                
+                
+
+            },
+            error: function (ex) {
+                alert('Failed' + ex);
+            }
+
+        });
+    }
+    function LimpiarUser() {
+        $('#tblUsuario tbody').empty();
+
+    }
+
+
+</script>
+
+
+

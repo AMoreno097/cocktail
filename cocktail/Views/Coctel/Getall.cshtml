@@ -1,0 +1,88 @@
+﻿
+@model ML.Coctel
+@{
+    ViewData["Title"] = "GetAll";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="container">
+    <section>
+
+        <h1 class="text-center">Lista de coctel</h1>
+        <p>
+            En este modulo puedes visualizar a los cocteles,<br />
+        </p>
+    </section>
+    <section>
+
+        <div style="float:right;">
+            <div class="row">
+                @Html.ActionLink("Agregar", "Form", "Producto", htmlAttributes: new { @class = "btn btn-success bi bi-person-plus-fill" })
+            </div>
+        </div>
+    </section>
+    <hr />
+    <section>
+        @if (Model.drinks == null)
+        {
+            <div class="row">
+                <div class="alert alert-danger" role="alert">
+                    @ViewBag.Message
+                </div>
+            </div>
+        }
+        else
+        {
+   <div class="row">
+         @foreach (ML.Coctel coctel in Model.drinks)
+         {
+
+   <div class="card text-white  bg-dark border-success mb-3 border-4" style="width: 18rem;">
+    @if (coctel.strDrinkThumb == null || coctel.strDrinkThumb == " ")
+                {
+                 <img src="/images/PSI.png" width="250px" height="250px"/>
+                }
+                else
+                {
+                   <img id="Img" src="@coctel.strDrinkThumb" style="width:250px ; height:250px" />
+                }
+  <div class="card-body">
+    <h5 class="card-title">@coctel.strDrink</h5>
+    <p class="card-text">@coctel.strCategory</p>
+        <p class="card-text">Ingrediente:</p>
+   <p class="card-text">
+
+    <p>@coctel.strIngredient1
+    <img id="Img" src= "https://www.thecocktaildb.com/images/ingredients/@coctel.strIngredient1@coctel.extension" style="width:50px ; height:50px" />
+     </p> 
+     <p>
+    @coctel.strIngredient2
+        <img id="Img" src= "https://www.thecocktaildb.com/images/ingredients/@coctel.strIngredient2@coctel.extension" style="width:50px ; height:50px" />
+     </p>
+     <p>
+    @coctel.strIngredient3
+    <img id="Img" src= "https://www.thecocktaildb.com/images/ingredients/@coctel.strIngredient3@coctel.extension" style="width:50px ; height:50px" />
+    </p>
+    <p class="card-text">Descripcion: @coctel.strInstructions</p>
+
+
+@*    <a href="@Url.Action("Form", "Producto", new { IdProducto = producto.IdProducto })" class="btn btn-primary">Modificar</a>*@    
+@*<a class="btn btn-danger bi bi-trash" href="@Url.Action("Delete", "Producto", new { IdProducto = producto.IdProducto})" onclick="return confirm('Estas seguro que deseas eliminar este registro?');"></a>*@
+                            
+        </div>
+      </div>
+     }
+</div>
+
+           
+
+        }
+
+
+
+    </section>
+</div>
+
+
+
